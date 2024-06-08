@@ -13,6 +13,8 @@ is_bootstrapped=$(curl -sX POST --data '{ "jsonrpc": "2.0", "id":1, "method":"in
 
 json=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNodeID" }' -H 'content-type:application/json' 127.0.0.1:9650/ext/info)
 node_id=$(echo $json | jq -r .result.nodeID)
+public_key=$(echo $json | jq -r .result.nodePOP.publicKey)
+proof_of_possession=$(echo $json | jq -r .result.nodePOP.proofOfPossession)
 
 if [ $service -ne 1 ]
 then 
@@ -40,6 +42,8 @@ cat << EOF
   "pid":$pid,
   "is_bootstrapped":"$is_bootstrapped",
   "node_id":"$node_id",
+  "public_key":"$public_key",
+  "proof_of_possession":"$proof_of_possession",
   "updated":"$(date --utc +%FT%TZ)"
 }
 EOF
