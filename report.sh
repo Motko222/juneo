@@ -2,7 +2,7 @@
 
 source ~/.bash_profile
 
-service=$(sudo systemctl status aethir-checker --no-pager | grep "active (running)" | wc -l)
+service=$(sudo systemctl status juneod --no-pager | grep "active (running)" | wc -l)
 type="validator"
 network="testnet"
 chain="socotra"
