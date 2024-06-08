@@ -10,11 +10,11 @@ id=juneo-$JUNEO_ID
 bucket=node
 is_bootstrapped=$(curl -sX POST --data '{ "jsonrpc": "2.0", "id":1, "method":"info.isBootstrapped", "params": {"chain" : "JUNE" } }' \
    -H 'content-type: application/json; ' 127.0.0.1:9650/ext/info | jq .result.isBootstrapped)
-
 json=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNodeID" }' -H 'content-type:application/json' 127.0.0.1:9650/ext/info)
 node_id=$(echo $json | jq -r .result.nodeID)
 public_key=$(echo $json | jq -r .result.nodePOP.publicKey)
 proof_of_possession=$(echo $json | jq -r .result.nodePOP.proofOfPossession)
+version=$(cat main.log | grep "initializing node" | awk -F "initializing node " '{print $NF}' | jq -r .version | awk -F "/" '{print $NF}')
 
 if [ $service -ne 1 ]
 then 
