@@ -11,12 +11,17 @@ bucket=node
 is_bootstrapped=$(curl -sX POST --data '{ "jsonrpc": "2.0", "id":1, "method":"info.isBootstrapped", "params": {"chain" : "JUNE" } }' \
    -H 'content-type: application/json; ' 127.0.0.1:9650/ext/info | jq .result.isBootstrapped)
 node_id=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNodeID" }' -H 'content-type:application/json' 127.0.0.1:9650/ext/info | jq -r .result.nodeID)
+
 if [ $service -ne 1 ]
 then 
   status="error";
   message="service not running"
-else 
-  status="ok";
+elif $is_bootstrapped
+  then 
+   status="ok"
+  else
+   status="warning"
+   message"not bootstrapped"
 fi
 
 cat << EOF
@@ -31,8 +36,8 @@ cat << EOF
   "message":"$message",
   "service":$service,
   "pid":$pid,
-  "is_bootstrapped":$is_bootstrapped,
-  "node_id":$node_id,
+  "is_bootstrapped":"$is_bootstrapped",
+  "node_id":"$node_id",
   "updated":"$(date --utc +%FT%TZ)"
 }
 EOF
