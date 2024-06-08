@@ -14,7 +14,7 @@ json=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNode
 node_id=$(echo $json | jq -r .result.nodeID)
 public_key=$(echo $json | jq -r .result.nodePOP.publicKey)
 proof_of_possession=$(echo $json | jq -r .result.nodePOP.proofOfPossession)
-version=$(cat main.log | grep "initializing node" | awk -F "initializing node " '{print $NF}' | jq -r .version | awk -F "/" '{print $NF}')
+version=$(cat ~/.juneogo/logs/main.log | grep "initializing node" | awk -F "initializing node " '{print $NF}' | jq -r .version | awk -F "/" '{print $NF}')
 
 if [ $service -ne 1 ]
 then 
