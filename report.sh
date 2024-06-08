@@ -21,7 +21,7 @@ elif $is_bootstrapped
    status="ok"
   else
    status="warning"
-   message"not bootstrapped"
+   message="not bootstrapped"
 fi
 
 cat << EOF
