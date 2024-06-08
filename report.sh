@@ -3,6 +3,7 @@
 source ~/.bash_profile
 
 service=$(sudo systemctl status juneod --no-pager | grep "active (running)" | wc -l)
+pid=$(pidof /root/juneogo-binaries/juneogo)
 type="validator"
 network="testnet"
 chain="socotra"
