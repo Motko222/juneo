@@ -2,7 +2,7 @@
 
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt install git http://docker.io docker-compose -y
+sudo apt install git docker.io docker-compose -y
 cd ~
 git clone https://github.com/Juneo-io/juneogo-binaries
 chmod +x ~/juneogo-binaries/juneogo
