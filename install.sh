@@ -4,6 +4,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt install git docker.io docker-compose -y
 cd ~
+rm -r juneogo-binaries
 git clone https://github.com/Juneo-io/juneogo-binaries
 chmod +x ~/juneogo-binaries/juneogo
 chmod +x ~/juneogo-binaries/plugins/jevm
@@ -22,6 +23,7 @@ User=root
 Type=simple
 ExecStart=/root/juneogo-binaries/juneogo
 Restart=on-failure
+RestartSec=60
 LimitNOFILE=65535
 
 [Install]
