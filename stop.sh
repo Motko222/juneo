@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo systemctl stop juneo.service
+sudo systemctl stop juneod.service
