@@ -12,6 +12,8 @@ chmod +x ~/juneogo-binaries/plugins/srEr2XGGtowDVNQ6YgXcdUb16FGknssLTGUFYg7iMqES
 mkdir -p ~/.juneogo/plugins
 mv ~/juneogo-binaries/plugins/jevm ~/.juneogo/plugins
 mv ~/juneogo-binaries/plugins/srEr2XGGtowDVNQ6YgXcdUb16FGknssLTGUFYg7iMqESJ4h8e ~/.juneogo/plugins
+mkdir ~/juneogo
+cp ~/juneogo-binaries/juneogo ~/juneogo
 
 tee /etc/systemd/system/juneod.service > /dev/null <<EOF 
 [Unit]
@@ -21,7 +23,7 @@ After=network.target
 [Service]
 User=root
 Type=simple
-ExecStart=/root/juneogo-binaries/juneogo
+ExecStart=/root/juneogo/juneogo --config ~/junogo/config.json
 Restart=on-failure
 RestartSec=60
 LimitNOFILE=65535
