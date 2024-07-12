@@ -13,7 +13,7 @@ group=node
 
 is_bootstrapped=$(curl -sX POST --data '{ "jsonrpc": "2.0", "id":1, "method":"info.isBootstrapped", "params": {"chain" : "JUNE" } }' \
    -H 'content-type: application/json; ' 127.0.0.1:9650/ext/info | jq .result.isBootstrapped)
-json=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNodeID" }' -H 'content-type:application/json' 127.0.0.1:9650/ext/info)
+json=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNodeID" }' -H 'content-type:application/json' $host:9650/ext/info)
 node_id=$(echo $json | jq -r .result.nodeID)
 public_key=$(echo $json | jq -r .result.nodePOP.publicKey)
 proof_of_possession=$(echo $json | jq -r .result.nodePOP.proofOfPossession)
