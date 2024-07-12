@@ -5,8 +5,8 @@ source ~/.bash_profile
 service=$(sudo systemctl status juneod --no-pager | grep "active (running)" | wc -l)
 pid=$(pidof /root/juneogo-binaries/juneogo)
 type="validator"
-network="testnet"
-chain="socotra"
+network="mainnet"
+chain=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNetworkName" }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info | jq -r .result.networkName)
 id=$JUNEO_ID
 group=node
 
