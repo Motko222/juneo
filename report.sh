@@ -6,7 +6,8 @@ service=$(sudo systemctl status juneod --no-pager | grep "active (running)" | wc
 pid=$(pidof /root/juneogo-binaries/juneogo)
 type="validator"
 network="mainnet"
-chain=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNetworkName" }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info | jq -r .result.networkName)
+host=$(cat ~/juneogo/config.json | jq -r '."http-host"')
+chain=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNetworkName" }' -H 'content-type:application/json;' $host:9650/ext/info | jq -r .result.networkName)
 id=$JUNEO_ID
 group=node
 
