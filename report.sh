@@ -10,6 +10,7 @@ host=$(cat ~/juneogo/config.json | jq -r '."http-host"')
 chain=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNetworkName" }' -H 'content-type:application/json;' $host:9650/ext/info | jq -r .result.networkName)
 id=$JUNEO_ID
 group=node
+owner=$OWNER
 
 is_bootstrapped=$(curl -sX POST --data '{ "jsonrpc": "2.0", "id":1, "method":"info.isBootstrapped", "params": {"chain" : "JUNE" } }' \
    -H 'content-type: application/json; ' $host:9650/ext/info | jq .result.isBootstrapped)
@@ -60,6 +61,6 @@ then
   --header "Content-Type: text/plain; charset=utf-8" \
   --header "Accept: application/json" \
   --data-binary "
-    report,id=$id,machine=$MACHINE,grp=$group status=\"$status\",message=\"$message\",version=\"$version\",url=\"$url\",chain=\"$chain\",network=\"$network\" $(date +%s%N) 
+    report,id=$id,machine=$MACHINE,grp=$group,owner=$owner status=\"$status\",message=\"$message\",version=\"$version\",url=\"$url\",chain=\"$chain\",network=\"$network\" $(date +%s%N) 
     "
 fi
