@@ -5,7 +5,7 @@ folder=$(echo $path | awk -F/ '{print $NF}')
 json=~/logs/report-$folder
 source ~/.bash_profile
 
-service=$(sudo systemctl status juneod --no-pager | grep "active (running)" | wc -l)
+service=$(sudo systemctl status juneod --no-pager | grep -a "active (running)" | wc -l)
 pid=$(pidof /root/juneogo-binaries/juneogo)
 type="validator"
 network="mainnet"
@@ -17,7 +17,7 @@ status_json=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.
 node_id=$(echo $status_json | jq -r .result.nodeID)
 public_key=$(echo $status_json | jq -r .result.nodePOP.publicKey)
 proof_of_possession=$(echo $status_json | jq -r .result.nodePOP.proofOfPossession)
-version=$(cat ~/.juneogo/logs/main.log | grep "initializing node" | tail -1 | awk -F "initializing node " '{print $NF}' | jq -r .version | awk -F "/" '{print $NF}')
+version=$(cat ~/.juneogo/logs/main.log | grep -a "initializing node" | tail -1 | awk -F "initializing node " '{print $NF}' | jq -r .version | awk -F "/" '{print $NF}')
 
 if [ $service -ne 1 ]
 then 
