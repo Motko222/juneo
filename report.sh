@@ -6,7 +6,6 @@ json=~/logs/report-$folder
 source ~/.bash_profile
 
 service=$(sudo systemctl status juneod --no-pager | grep -a "active (running)" | wc -l)
-pid=$(pidof /root/juneogo-binaries/juneogo)
 type="validator"
 network="mainnet"
 host=$(cat ~/juneogo/config.json | jq -r '."http-host"')
@@ -48,7 +47,6 @@ cat >$json << EOF
         "status":"$status",
         "message":"$message",
         "service":$service,
-        "pid":$pid,
         "is_bootstrapped":"$is_bootstrapped",
         "node_id":"$node_id",
         "public_key":"$public_key",
