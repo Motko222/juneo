@@ -5,7 +5,7 @@ folder=$(echo $path | awk -F/ '{print $NF}')
 json=~/logs/report-$folder
 source ~/.bash_profile
 
-service=$(sudo systemctl status juneod --no-pager | grep -a "active (running)" | wc -l)
+service=$(sudo systemctl status $folder --no-pager | grep -a "active (running)" | wc -l)
 type="validator"
 network="mainnet"
 host=$(cat ~/juneogo/config.json | jq -r '."http-host"')
