@@ -25,12 +25,17 @@ if [ $service -ne 1 ]
 then 
   status="error";
   message="service not running"
-elif $is_bootstrapped
+elif [ ! $is_bootstrapped ]
   then 
-   status="ok"
-  else
    status="warning"
    message="not bootstrapped"
+elif [ $uptime -lt 90 ]
+   then 
+     status="warning"
+     message="uptime=$uptime%"
+else
+     status="ok"
+     message="uptime=$uptime%"
 fi
 
 cat >$json << EOF
