@@ -17,7 +17,7 @@ node_id=$(echo $status_json | jq -r .result.nodeID)
 public_key=$(echo $status_json | jq -r .result.nodePOP.publicKey)
 proof_of_possession=$(echo $status_json | jq -r .result.nodePOP.proofOfPossession)
 version=$(cat ~/.juneogo/logs/main.log | grep -a "initializing node" | tail -1 | awk -F "initializing node " '{print $NF}' | jq -r .version | awk -F "/" '{print $NF}')
-status_val=$(curl -sX POST --data '{ "jsonrpc": "2.0", "method": "platform.getCurrentValidators", "params": { "nodeIDs": ["NodeID-7GpuLh4UvM86d7CZT4JD6Y3dNpqEHXEz3"] }, "id": 1 }' -H 'content-type:application/json;' 10.0.4.198:9650/ext/bc/P )
+status_val=$(curl -sX POST --data '{ "jsonrpc": "2.0", "method": "platform.getCurrentValidators", "params": { "nodeIDs": ["NodeID-7GpuLh4UvM86d7CZT4JD6Y3dNpqEHXEz3"] }, "id": 1 }' -H 'content-type:application/json;' $host:9650/ext/bc/P )
 uptime=$(echo $status_val | | jq -r .result.validators[].uptime | cut -d . -f 1 )
 
 
