@@ -8,7 +8,7 @@ source ~/.bash_profile
 service=$(sudo systemctl status $folder --no-pager | grep -a "active (running)" | wc -l)
 type="validator"
 network="mainnet"
-host=$(cat ~/juneogo/config.json | jq -r '."http-host"')
+host=$(cat ~/scripts/$folder/config.json | jq -r '."http-host"')
 chain=$(curl -sX POST --data '{ "jsonrpc":"2.0", "id" :1, "method" :"info.getNetworkName" }' -H 'content-type:application/json;' $host:9650/ext/info | jq -r .result.networkName)
 is_bootstrapped=$(curl -sX POST --data '{ "jsonrpc": "2.0", "id":1, "method":"info.isBootstrapped", "params": {"chain" : "JUNE" } }' \
    -H 'content-type: application/json; ' $host:9650/ext/info | jq .result.isBootstrapped)
