@@ -10,7 +10,7 @@ After=network.target
 [Service]
 User=root
 Type=simple
-ExecStart=/root/juneogo/juneogo --config-file="/root/juneogo/config.json"
+ExecStart=/root/juneogo/juneogo --config-file="/root/scripts/$folder/config.json"
 Restart=on-failure
 RestartSec=60
 LimitNOFILE=65535
