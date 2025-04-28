@@ -1,7 +1,14 @@
 #!/bin/bash
 
-cd ~
+read -p "Sure? " c
+case $c in y|Y) ;; *) exit ;; esac
+
+cd /root
+rm -r juneogo
+rm -r .juneogo/db
+rm -r .juneogo/plugins
 rm -r juneogo-binaries
+
 git clone https://github.com/Juneo-io/juneogo-binaries
 chmod +x ~/juneogo-binaries/juneogo
 chmod +x ~/juneogo-binaries/plugins/jevm
